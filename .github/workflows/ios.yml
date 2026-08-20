@@ -7,11 +7,13 @@
 # Download the artifact from the run's summary page, then sideload it.
 name: iOS build
 
-# Manual only. macOS runners bill at 10x, so a private repo's free budget is
-# roughly 200 real minutes a month -- about 5-8 iOS builds. Trigger this from
-# the Actions tab when you actually want a new .ipa to sideload.
+# The repo is public, so macOS runner minutes are unlimited and every push can
+# produce a fresh .ipa. If it ever goes private, drop the `push:` trigger --
+# macOS bills at 10x there, leaving only ~200 real minutes a month.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
   build:
